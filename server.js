@@ -1,6 +1,12 @@
 /* eslint strict: 0, no-console: 0 */
 'use strict';
 
+// RemoteDev Extension: Apply default options & start remotedev-server
+require('remotedev-extension')({
+  port: 5678,
+  runserver: true
+});
+
 const path = require('path');
 const express = require('express');
 const webpack = require('webpack');
@@ -30,5 +36,5 @@ app.listen(PORT, 'localhost', err => {
     return;
   }
 
-  console.log(`Listening at http://localhost:${PORT}`);
+  console.log(`[Webpack Dev] Listening at http://localhost:${PORT}`);
 });

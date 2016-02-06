@@ -38,6 +38,8 @@ app.on('ready', () => {
   });
 
   if (process.env.NODE_ENV === 'development') {
+    // BrowserWindow.removeDevToolsExtension('RemoteDev DevTools');
+    BrowserWindow.addDevToolsExtension('node_modules/remotedev-extension/dist');
     mainWindow.openDevTools();
   }
 
