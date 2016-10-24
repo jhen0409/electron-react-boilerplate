@@ -22,7 +22,9 @@ const router = routerMiddleware(hashHistory);
 const composeEnhancers =
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({  // eslint-disable-line
     actionCreators,
-  }) || compose;
+  }) ||
+  compose;
+
 const enhancer = composeEnhancers(
   applyMiddleware(thunk, router, logger)
 );
