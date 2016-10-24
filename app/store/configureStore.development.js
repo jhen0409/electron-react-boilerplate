@@ -19,19 +19,16 @@ const logger = createLogger({
 
 const router = routerMiddleware(hashHistory);
 
-const enhancer = compose(
-  applyMiddleware(thunk, router, logger),
-  window.devToolsExtension ?
-    window.devToolsExtension({ actionCreators }) :
-    noop => noop
+const composeEnhancers =
+  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({  // eslint-disable-line
+    actionCreators,
+  }) || compose;
+const enhancer = composeEnhancers(
+  applyMiddleware(thunk, router, logger)
 );
 
 export default function configureStore(initialState) {
   const store = createStore(rootReducer, initialState, enhancer);
-
-  if (window.devToolsExtension) {
-    window.devToolsExtension.updateStore(store);
-  }
 
   if (module.hot) {
     module.hot.accept('../reducers', () =>
